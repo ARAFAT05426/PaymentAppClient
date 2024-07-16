@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import Statistics from "../Pages/Statistics/Statistics";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 export const routes = createBrowserRouter([
   {
@@ -9,8 +11,16 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Statistics />
+        element: <Statistics />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />
+  },
+  {
+    path: "signup",
+    element: <SignUp />,
   },
 ]);

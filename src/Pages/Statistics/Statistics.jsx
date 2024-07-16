@@ -1,6 +1,8 @@
+import AdminStats from "./AdminStats/AdminStats";
+
 const Statistics = () => {
   return <div>
-    Statistics
+    <AdminStats />
   </div>;
 };
 export default Statistics;

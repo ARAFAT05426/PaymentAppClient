@@ -12,6 +12,7 @@ const SignUp = () => {
     const name = target.name.value;
     const email = target.email.value;
     const number = target.number.value;
+    const role = target.role.value;
     const password = target.password.value;
     if(typeof password === "number" || password.length !== 5){
       return toast.error("password must be 5 digit number")
@@ -21,6 +22,7 @@ const SignUp = () => {
         name,
         email,
         number,
+        role,
         password,
       });
       if (data.success) {
@@ -31,7 +33,7 @@ const SignUp = () => {
         e.target.reset();
       }
     } catch (error) {
-      console.log(error);
+      return toast.error("Internel server error! Plz try again")
     }
   };
   return (
@@ -74,13 +76,17 @@ const SignUp = () => {
             name="number"
             placeholder="Enter your phone number"
           />
+          <select className="border py-1 px-3 text-sm outline-none" name="role" id="">
+              <option value="user">User</option>
+              <option value="agent">Agent</option>
+          </select>
           <TextField
             icon=""
             name="password"
             placeholder="Enter your password"
             type="password"
           />
-          <PrimaryButton text="Login" />
+          <PrimaryButton text="Sign Up" />
         </form>
         <div className="flex gap-2 items-center justify-center text-sm font-medium">
           Already have an account?

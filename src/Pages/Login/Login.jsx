@@ -2,14 +2,27 @@ import { Link } from "react-router-dom";
 import PrimaryButton from "../../Components/Buttons/Primary/PrimaryButton";
 import TextField from "../../Components/InputFields/TextField/TextField";
 import bg from "/login.jpg";
+import useAxiosCommon from "../../Hooks/axiosCommon/useAxiosCommon";
+import { toast } from "sonner";
 const Login = () => {
-  const handleAgent = (e) => {
+  const commonaxios = useAxiosCommon();
+  const handleAgent = async (e) => {
     e.preventDefault();
     const target = e.target;
-    const email = target.email.value;
-    const number = target.number.value;
+    const account = target.account.value;
     const password = target.password.value;
-    console.log(email, password);
+    if (typeof password === "number" || password.length !== 5) {
+      return toast.error("password must be 5 digit number");
+    }
+    try {
+      const { data } = await commonaxios.post("/users/auth", {
+        account,
+        password,
+      });
+      console.log(data);
+    } catch (error) {
+      return toast.error("Internel server error! Plz try again")
+    }
   };
   return (
     <div className="h-screen overflow-hidden flex flex-col md:flex-row">
@@ -35,7 +48,7 @@ const Login = () => {
         <form onSubmit={handleAgent} className="w-full flex flex-col gap-4">
           <TextField
             icon="/icons/user.png"
-            name="email"
+            name="account"
             placeholder="Enter your email / phonenumber"
           />
           <TextField
